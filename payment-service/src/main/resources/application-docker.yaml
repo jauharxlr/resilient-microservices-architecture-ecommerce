@@ -8,4 +8,4 @@ management:
         step: 2s
 
 service-net:
-  notification-service: http://notification-service:8081
+  notification-service: http://notification-service:8082

@@ -2,7 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.0'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'org.openapi.generator' version '7.0.1'
 }
+
+apply plugin: 'org.openapi.generator'
 
 group = 'com.example.orderservice'
 version = '0.0.1-SNAPSHOT'
@@ -60,4 +63,43 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+task ecomBuild(type: GradleBuild) {
+	group = 'ecommerce'
+	description = 'Cleans, generates OpenAPI resources, and builds.'
+	tasks = ['clean','codegenPaymentService', 'build']
+}
+
+task codegenPaymentService(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+	group = "ecommerce"
+	generatorName = "java"
+	inputSpec = "$rootDir/src/main/resources/swagger/payment-service.json".toString()
+	outputDir = "$rootDir/generated".toString()
+	apiPackage = "com.example.apps.paymentservice.api"
+	modelPackage = "com.example.apps.paymentservice.model"
+	library = "resttemplate"
+	generateModelTests = false
+	generateApiTests = false
+	validateSpec = false
+	configOptions = [
+			dateLibrary      : "java22",
+			useResponseEntity: "false",
+			openApiNullable: "false",
+			useJakartaEe: "true"
+	]
+}
+
+tasks.named('compileJava') {
+	mustRunAfter tasks.named('codegenPaymentService')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs 'generated/src/main/java'
+			srcDirs 'src/main/java'
+		}
+	}
 }

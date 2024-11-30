@@ -8,4 +8,4 @@ management:
         step: 2s
 
 service-net:
-  payment-service: http://localhost:8081
+  payment-service: http://payment-service:8081

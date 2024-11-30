@@ -5,3 +5,5 @@
 **/gradle/
 **/build/
 **/.gradle/
+/payment-service/generated/
+/order-service/generated/
