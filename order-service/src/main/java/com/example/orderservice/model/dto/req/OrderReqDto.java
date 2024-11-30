@@ -18,8 +18,11 @@ public class OrderReqDto {
 
     @Data
     public static class Cart {
+        @NotNull
         private Long productId;
+        @NotNull
         private Double price;
+        @NotNull
         private Double qty;
     }
 

@@ -30,6 +30,7 @@ public class PaymentController {
             long endTime = System.currentTimeMillis();
             long responseTime = endTime - startTime;
             metricsConfig.setPaymentRequestResponseTimeGuage(responseTime);
+            log.info("Payment process completed for order #{}", paymentReqDto.getOrderId());
         }
     }
 }
