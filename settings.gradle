@@ -1,0 +1,3 @@
+rootProject.name = 'ecommerce'
+
+include 'order-service', 'notification-service', 'payment-service'
