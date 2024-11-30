@@ -7,3 +7,5 @@ management:
         url: http://otel-collector:4318/v1/metrics
         step: 2s
 
+service-net:
+  payment-service: http://localhost:8081

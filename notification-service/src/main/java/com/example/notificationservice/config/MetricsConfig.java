@@ -15,26 +15,25 @@ import java.util.concurrent.atomic.AtomicLong;
 @Configuration
 public class MetricsConfig {
 
-    private final Counter orderRequestCounter;
-    private final AtomicLong orderRequestResponseTimeGuage;
+    private final Counter notificationRequestCounter;
+    private final AtomicLong notificationRequestResponseTimeGuage;
 
     public MetricsConfig(MeterRegistry meterRegistry){
-        orderRequestCounter = Counter.builder(MetricConstants.ORDER_REQUEST.getMetric())
-                .description(MetricConstants.ORDER_REQUEST.getDescription())
-                .tags(MetricConstants.ORDER_REQUEST.getTags())
+        notificationRequestCounter = Counter.builder(MetricConstants.NOTIFICATION_REQUEST.getMetric())
+                .description(MetricConstants.NOTIFICATION_REQUEST.getDescription())
+                .tags(MetricConstants.NOTIFICATION_REQUEST.getTags())
                 .register(meterRegistry);
 
         // Register the gauge
-        orderRequestResponseTimeGuage = new AtomicLong(0);
-        Gauge.builder(MetricConstants.ORDER_REQUEST_RESPONSE_TIME.getMetric(), orderRequestResponseTimeGuage, AtomicLong::get)
-                .description(MetricConstants.ORDER_REQUEST_RESPONSE_TIME.getDescription())
-                .tags(MetricConstants.ORDER_REQUEST_RESPONSE_TIME.getTags())
+        notificationRequestResponseTimeGuage = new AtomicLong(0);
+        Gauge.builder(MetricConstants.NOTIFICATION_REQUEST_RESPONSE_TIME.getMetric(), notificationRequestResponseTimeGuage, AtomicLong::get)
+                .description(MetricConstants.NOTIFICATION_REQUEST_RESPONSE_TIME.getDescription())
+                .tags(MetricConstants.NOTIFICATION_REQUEST_RESPONSE_TIME.getTags())
                 .register(meterRegistry);
     }
 
-    public void setOrderRequestResponseTimeGuage(long responseTime) {
-        orderRequestResponseTimeGuage.set(responseTime);
-        log.info("Updated response time: {} ms", responseTime);
+    public void setNotificationRequestResponseTimeGuage(long responseTime) {
+        notificationRequestResponseTimeGuage.set(responseTime);
     }
 
 }

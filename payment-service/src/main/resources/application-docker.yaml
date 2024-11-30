@@ -7,3 +7,5 @@ management:
         url: http://otel-collector:4318/v1/metrics
         step: 2s
 
+service-net:
+  notification-service: http://notification-service:8081

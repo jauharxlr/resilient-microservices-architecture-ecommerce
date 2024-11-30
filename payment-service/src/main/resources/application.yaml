@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
-    name: order-service
+    name: payment-service
 
 management:
   tracing:
@@ -25,3 +25,5 @@ management:
         url: http://localhost:4318/v1/metrics
         step: 2s
 
+service-net:
+  notification-service: http://localhost:8082

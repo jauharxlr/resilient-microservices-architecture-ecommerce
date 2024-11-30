@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MetricConstants {
 
-    ORDER_REQUEST("order_request","Counter for tracking order requests", new String[]{"service", "order-service", "controller", "OrderController"}),
-    ORDER_REQUEST_RESPONSE_TIME("order_request_response_time","Guage for tracking order requests response time", new String[]{"service", "order-service", "controller", "OrderController"});
+    PAYMENT_REQUEST("payment_request","Counter for tracking payment requests", new String[]{"service", "payment-service", "controller", "paymentController"}),
+    PAYMENT_REQUEST_RESPONSE_TIME("payment_request_response_time","Guage for tracking payment requests response time", new String[]{"service", "payment-service", "controller", "paymentController"});
     private final String metric;
     private final String description;
     private final String[] tags;
