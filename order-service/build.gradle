@@ -87,7 +87,8 @@ task codegenPaymentService(type: org.openapitools.generator.gradle.plugin.tasks.
 			dateLibrary      : "java22",
 			useResponseEntity: "false",
 			openApiNullable: "false",
-			useJakartaEe: "true"
+			useJakartaEe: "true",
+			additionalModelTypeAnnotations: "@lombok.Builder\n@lombok.AllArgsConstructor"
 	]
 }
 

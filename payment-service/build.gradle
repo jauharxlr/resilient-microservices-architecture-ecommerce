@@ -86,7 +86,8 @@ task codegenNotificationService(type: org.openapitools.generator.gradle.plugin.t
 			dateLibrary      : "java22",
 			useResponseEntity: "false",
 			openApiNullable: "false",
-			useJakartaEe: "true"
+			useJakartaEe: "true",
+			additionalModelTypeAnnotations: "@lombok.Builder\n@lombok.AllArgsConstructor"
 	]
 }
 
