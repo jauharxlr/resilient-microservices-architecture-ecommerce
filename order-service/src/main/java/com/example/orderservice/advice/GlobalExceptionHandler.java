@@ -1,7 +1,7 @@
 package com.example.orderservice.advice;
 
 
-import com.example.orderservice.config.MetricsConfig;
+import com.example.orderservice.helper.MetricsHelper;
 import com.example.orderservice.exception.GeneralException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +22,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    private final MetricsConfig metricsConfig;
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        metricsConfig.captureValidationErrorMetric();
+        MetricsHelper.captureValidationErrorMetric();
         BindingResult bindingResult = ex.getBindingResult();
         Map<String,String> validationErrors = bindingResult.getFieldErrors().stream()
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
@@ -36,7 +34,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(GeneralException.class)
     public ResponseEntity<?> handleInventoryExceptions(GeneralException ex) {
-        metricsConfig.captureGeneralExceptionMetric();
+        MetricsHelper.captureGeneralExceptionMetric();
         Map<String,String> validationErrors = new HashMap<>();
         validationErrors.put("message", ex.get().getDescription());
         validationErrors.put("code", ex.get().getCode());

@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ExecutionException;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -38,6 +40,10 @@ public class OrderServiceImpl implements OrderService {
                 .payableAmount(payableAmount)
                 .build();
         log.debug("Initiating payment request");
-        paymentServiceDao.initiatePayment(paymentReqDto);
+        try {
+            paymentServiceDao.initiatePayment(paymentReqDto).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
