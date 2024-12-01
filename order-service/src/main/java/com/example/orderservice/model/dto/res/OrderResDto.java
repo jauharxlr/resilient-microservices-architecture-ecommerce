@@ -7,4 +7,6 @@ import lombok.Data;
 @Builder
 public class OrderResDto {
     Long orderId;
+    String status;
+    String message;
 }

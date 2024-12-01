@@ -7,6 +7,8 @@ import com.example.orderservice.model.dto.req.OrderReqDto;
 import com.example.orderservice.model.dto.res.OrderResDto;
 import com.example.orderservice.service.OrderService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
+@Tag(name = "OrderController", description = "APIs for order management")
 public class OrderController {
     
     private final OrderService orderService;
 
-    @PostMapping
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    @Operation(summary = "Post API to create a new order")
     @CircuitBreaker(name = "paymentService", fallbackMethod = "paymentFallback")
     public ResponseEntity<OrderResDto> createOrder(@RequestBody @Valid OrderReqDto orderReqDto) {
         log.info("OrderController createOrder()");
