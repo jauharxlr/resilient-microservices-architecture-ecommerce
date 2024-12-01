@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
         NotificationReqDto notificationReqDto = NotificationReqDto.builder()
                 .message(paymentMessage)
                 .userId(paymentReqDto.getUserId())
+                .types(List.of(NotificationReqDto.TypesEnum.PUSH))
                 .build();
         notificationServiceDao.sendNotification(notificationReqDto);
     }

@@ -50,9 +50,15 @@ dependencies {
 	//	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 	runtimeOnly 'io.micrometer:micrometer-registry-otlp'
 
-	//for micrometer distributed tracing
+	//for micrometer distributed tracing using opentelemetry
 	runtimeOnly 'io.micrometer:micrometer-tracing-bridge-otel'
 	runtimeOnly 'io.opentelemetry:opentelemetry-exporter-otlp'
+
+	//for resilience4j
+	implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'io.github.resilience4j:resilience4j-micrometer'
+
 }
 
 dependencyManagement {

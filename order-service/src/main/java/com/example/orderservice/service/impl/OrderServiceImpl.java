@@ -18,14 +18,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResDto createOrder(OrderReqDto orderReqDto){
-        try{
             Long orderId = 1L;
             log.info("OrderServiceImpl createOrder()");
             processPayment(orderId, orderReqDto);
-            return OrderResDto.builder().orderId(orderId).build();
-        } finally {
             log.info("Order processed successfully");
-        }
+            return OrderResDto.builder().orderId(orderId).build();
     }
 
     private void processPayment(Long orderId, OrderReqDto orderReqDto) {

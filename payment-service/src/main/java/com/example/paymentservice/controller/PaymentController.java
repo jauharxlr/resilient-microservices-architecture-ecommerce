@@ -3,6 +3,7 @@ package com.example.paymentservice.controller;
 import com.example.paymentservice.config.MetricsConfig;
 import com.example.paymentservice.model.dto.req.PaymentReqDto;
 import com.example.paymentservice.service.PaymentService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,18 +20,20 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping
+    @CircuitBreaker(name = "paymentService", fallbackMethod = "paymentFallback")
     public ResponseEntity<Void> processPayment(@RequestBody @Valid PaymentReqDto paymentReqDto) {
-        log.info("PaymentController - processPayment()");
-        long startTime = System.currentTimeMillis();
-        try {
-            metricsConfig.getPaymentRequestCounter().increment();
-            paymentService.processPayment(paymentReqDto);
-            return ResponseEntity.ok().build();
-        } finally {
-            long endTime = System.currentTimeMillis();
-            long responseTime = endTime - startTime;
-            metricsConfig.setPaymentRequestResponseTimeGuage(responseTime);
-            log.info("Payment process completed for order #{}", paymentReqDto.getOrderId());
-        }
+        return ResponseEntity.internalServerError().build();
+//        log.info("PaymentController - processPayment()");
+//        long startTime = System.currentTimeMillis();
+//        try {
+//            metricsConfig.getPaymentRequestCounter().increment();
+//            paymentService.processPayment(paymentReqDto);
+//            return ResponseEntity.ok().build();
+//        } finally {
+//            long endTime = System.currentTimeMillis();
+//            long responseTime = endTime - startTime;
+//            metricsConfig.setPaymentRequestResponseTimeGuage(responseTime);
+//            log.info("Payment process completed for order #{}", paymentReqDto.getOrderId());
+//        }
     }
 }
