@@ -1,6 +1,6 @@
 # Resilient Microservices Architecture
 
-This project implements a resilient microservices architecture to handle order creation, payment processing, and user notifications. The architecture features fault-tolerance, observability, and automated API generation, ensuring modularity and scalability. 
+This project implements a resilient microservices architecture(SOA) to handle order creation, payment processing, and user notifications. The architecture features fault-tolerance, observability, and automated API generation, ensuring modularity and scalability. 
 
 ---
 
@@ -79,9 +79,42 @@ Observability is integrated into the system using **OpenTelemetry**.
 - Metrics, such as request counts and response times, are collected and pushed to **Prometheus** for real-time monitoring.
 - **Prometheus Dashboard URL**: [http://localhost:9090](http://localhost:9090)
 
+### Captured metrics form each service
+1. Order Service
+- ***validation_error*** Counter for tracking validation errors
+- ***order_request*** Counter for tracking order requests
+- ***order_request_response_time*** Gauge for tracking order requests response time
+- ***general_exception*** Counter for tracking General Exceptions
+- ***payment_request*** Counter for tracking outgoing payment API call
+- ***payment_request_retry*** Counter for tracking outgoing payment API call try failures
+- ***payment_request_timeout*** Counter for tracking outgoing payment API call timeout failures
+- ***payment_request_success*** Counter for tracking outgoing payment API call with success response
+- ***order_request_failure*** Counter for tracking order request failure
+- ***order_request_success*** Counter for tracking order request success
+- ***order_get_request*** Counter for tracking order get requests
+- ***order_get_request_response_time*** Gauge for tracking order get requests response time
+
+2. Payment Service
+- ***validation_error*** Counter for tracking validation errors
+- ***general_exception*** Counter for tracking General Exceptions
+- ***payment_request*** Counter for tracking payment requests
+- ***payment_request_response_time*** Gauge for tracking payment requests response time
+- ***payment_request_success*** Counter for tracking payment request success
+- ***payment_request_failure*** Counter for tracking payment request failure
+- ***notification_request*** Counter for tracking outgoing notification API call
+- ***notification_request_retry*** Counter for tracking outgoing notification API call try failures
+- ***notification_request_timeout*** Counter for tracking outgoing notification API call timeout failures
+- ***notification_request_success*** Counter for tracking outgoing notification API call with success response
+
+
+3. Notification Service Metrics
+- ***notification_request*** Counter for tracking notification requests
+- ***notification_request_response_time*** Gauge for tracking notification requests response time
+- ***validation_error*** Counter for tracking validation errors
+
 ---
 
-## Automated API Management
+## Automated API Doc Management
 
 This project uses **OpenAPI Generator** to simplify and standardize API-related tasks:
 
@@ -99,7 +132,7 @@ By leveraging OpenAPI Generator, manual API client development is avoided, ensur
 - **OpenTelemetry**: Provides distributed tracing and metrics collection for observability.
 - **Zipkin**: A distributed tracing system to visualize and monitor traces across services.
 - **Prometheus**: A metrics monitoring system for real-time observability.
-- **OpenAPI Generator**: Automates the generation of API documentation and REST API clients.
+- **OpenAPI Documentation**: Automates the generation of API documentation and REST API clients.
 - **H2 Database**: An in-memory database for quick testing and prototyping.
 
 
@@ -122,7 +155,7 @@ Ensure you have the following installed:
    ```bash
    ./build.sh
    ```
-This script is capable of building the springboot projects and then startup the docker. with following containers
+This script is capable of building the springboot projects and then startup the **docker** for following containers:
 
 
 1. Container prometheus
