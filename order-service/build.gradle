@@ -104,6 +104,8 @@ tasks.named('compileJava') {
 	mustRunAfter tasks.named('codegenPaymentService')
 }
 
+build.dependsOn codegenPaymentService
+
 sourceSets {
 	main {
 		java {

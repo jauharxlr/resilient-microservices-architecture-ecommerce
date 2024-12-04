@@ -9,13 +9,11 @@ import lombok.Data;
 @Builder
 public class OrderResDto {
     Long orderId;
-    Long userId;
     PaymentStatus paymentStatus;
 
     public static OrderResDto from(OrderEntity orderEntity){
         return OrderResDto.builder()
                 .orderId(orderEntity.getId())
-                .userId(orderEntity.getUserId())
                 .paymentStatus(orderEntity.getPaymentStatus())
                 .build();
     }

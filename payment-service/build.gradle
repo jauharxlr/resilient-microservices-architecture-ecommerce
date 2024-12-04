@@ -102,6 +102,8 @@ tasks.named('compileJava') {
 	mustRunAfter tasks.named('codegenNotificationService')
 }
 
+build.dependsOn codegenNotificationService
+
 sourceSets {
 	main {
 		java {

@@ -33,7 +33,8 @@ public class OrderServiceImpl implements OrderService {
             log.debug("Order saved to db #{}", orderEntity.getId());
             processPayment(orderEntity, orderReqDto);
             log.info("Order processed successfully #{}", orderEntity.getId());
-            return OrderResDto.builder().orderId(orderEntity.getId()).build();
+            orderEntity = orderEntityRepository.save(orderEntity);
+            return OrderResDto.from(orderEntity);
     }
 
     @Override
