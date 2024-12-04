@@ -1,10 +1,18 @@
 # Resilient Microservices Architecture
 
-This project implements a resilient microservices architecture to handle order creation, payment processing, and user notifications. The architecture features fault-tolerance, observability, and automated API generation, ensuring modularity and scalability.
+This project implements a resilient microservices architecture to handle order creation, payment processing, and user notifications. The architecture features fault-tolerance, observability, and automated API generation, ensuring modularity and scalability. 
 
 ---
 
-## Overview
+## Notes:
+Noting that this is a test project, I have shorthanded few of the implementations, and of course there are some icing and cherries as well:
+1. There are no actual payment debit feature(ie, no actual payment gateway integration done).
+2. There are no actual notification send(ie, no firebase or sms gateway integration).
+3. Unit testing is only written for PaymentService.
+4. I assume the project is fully capable of representing proper knowledge on API Documentation, resilience, Unit Testing, Error handling, Observability, etc...
+5. Proper metrics are captured and pushed to prometheus using the OpenTelemtry's collector.
+6. The project showcases extensive usage of gradle for source generation and custom build scripts.
+7. The project also highlights the proper usage of docker.
 
 ### Services
 1. **Order Service**: Manages customer orders and stores order details in an H2 database.
@@ -56,6 +64,7 @@ OpenAPI documentation is provided for all microservices, enabling exploration an
 
 These resilience patterns, implemented using **Resilience4j**, ensure system reliability, minimize downtime, and enhance the user experience.
 
+- Similar approach is done in the **PaymentService** to ensure resilience when connecting with **NotificationService**    
 ---
 
 ## Observability
