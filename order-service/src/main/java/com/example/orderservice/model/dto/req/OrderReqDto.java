@@ -61,12 +61,18 @@ public class OrderReqDto {
 
     public OrderEntity toEntity() {
         double payableAmount = cart.stream().mapToDouble(e -> e.getPrice() * e.getQty()).sum();
-        List<OrderedProductEntity> orderedProducts = cart.stream().map(OrderReqDto.Cart::toEntity).collect(Collectors.toList());
-        return OrderEntity.builder()
+        OrderEntity order = OrderEntity.builder()
                 .payableAmount(payableAmount)
                 .userId(userId)
-                .orderedProducts(orderedProducts)
                 .paymentStatus(PaymentStatus.PENDING)
                 .build();
+
+        List<OrderedProductEntity> orderedProducts = cart.stream()
+                .map(OrderReqDto.Cart::toEntity)
+                .peek(op -> op.setOrderEntity(order))
+                .collect(Collectors.toList());
+
+        order.setOrderedProducts(orderedProducts);
+        return order;
     }
 }
