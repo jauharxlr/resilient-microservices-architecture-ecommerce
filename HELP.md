@@ -113,7 +113,21 @@ Ensure you have the following installed:
 ### Steps to Run
 
 1. **Clone the Repository**:
+2. cd to the root directory.
+3. If you're setting up for the first time then grant permission to build.sh file
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   chmod +x ./build.sh
+   ```
+4. finally, run the build.sh file
+   ```bash
+   ./build.sh
+   ```
+This script is capable of building the springboot projects and then startup the docker. with following containers
 
+
+1. Container prometheus
+2. Container ecommerce-otel-collector
+3. Container notification-service
+4. Container order-service
+5. Container payment-service   
+6. Container ecommerce-zipkin-all-in-one
