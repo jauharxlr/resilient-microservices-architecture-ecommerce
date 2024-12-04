@@ -1,0 +1,29 @@
+
+resilience4j:
+  retry:
+    instances:
+      notificationService:
+        registerHealthIndicator: true
+        maxAttempts: 3 #maximum retry attempts
+        waitDuration: 500ms #wait time before next attempt
+#  circuitbreaker:
+#    instances:
+#      paymentService:
+#        registerHealthIndicator: true
+#        eventConsumerBufferSize: 10
+#        failureRateThreshold: 50 #50% of failures from the sample calls
+#        minimumNumberOfCalls: 5 #minimum number of calls to consider as samples before transition to OPEN state before metric calcs
+#        slidingWindowSize: 10 #total calls taken as samples to calculate metrics
+#        slidingWindowType: COUNT_BASED
+#        waitDurationInOpenState: 3s #waiting time before halfOpen state
+#        automaticTransitionFromOpenToHalfOpenEnabled: true
+#        permittedNumberOfCallsInHalfOpenState: 3
+  timelimiter:
+    instances:
+      notificationService:
+        registerHealthIndicator: true
+        timeoutDuration: 3s
+
+
+service-net:
+  payment-service: http://localhost:8081

@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
         validationErrors.put("message", ex.get().getDescription());
         validationErrors.put("code", ex.get().getCode());
         log.debug("GENERAL EXCEPTION : {} - {}", ex.get().getCode(), ex.get().getDescription());
-        return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(validationErrors, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
